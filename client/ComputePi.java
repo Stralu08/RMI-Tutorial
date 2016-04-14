@@ -33,7 +33,9 @@ package client;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Scanner;
 import java.math.BigDecimal;
+
 import compute.Compute;
 
 public class ComputePi {
@@ -45,12 +47,30 @@ public class ComputePi {
             String name = "Compute";
             Registry registry = LocateRegistry.getRegistry(args[0]);
             Compute comp = (Compute) registry.lookup(name);
-            Pi task = new Pi(Integer.parseInt(args[1]));
-            BigDecimal pi = comp.executeTask(task);//Task wird ausgeführt und gibt Pi als Rückgabewert zurück
-            System.out.println(pi);
+            
+            Scanner s = new Scanner(System.in);
+            System.out.println("Enter 'Pi' for the calculation of Pi, or Euler the calculation of e");
+            String operation = s.nextLine();
+            System.out.println("Please enter the number of digits you want");
+            int digits = s.nextInt();
+            
+            switch(operation){
+            case "Pi":
+            	Pi task = new Pi(digits);
+            	BigDecimal pi = comp.executeTask(task);//Task wird ausgeführt und gibt Pi als Rückgabewert zurück
+            	System.out.println(pi);
+            	break;
+            case "Euler":
+            	 Euler Task = new Euler(10);
+            	 BigDecimal e = comp.executeTask(Task);
+            	 System.out.println(e);
+            	break;
+            }
         } catch (Exception e) {
             System.err.println("ComputePi exception:");
             e.printStackTrace();
         }
     }    
 }
+
+
