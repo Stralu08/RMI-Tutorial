@@ -61,7 +61,7 @@ public class ComputePi {
             	System.out.println(pi);
             	break;
             case "Euler":
-            	 Euler Task = new Euler(10);
+            	 Euler Task = new Euler(digits);
             	 BigDecimal e = comp.executeTask(Task);
             	 System.out.println(e);
             	break;
